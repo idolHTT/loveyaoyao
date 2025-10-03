@@ -1,348 +1,141 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 优化viewport设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>爱的邀约</title>
     <link rel="stylesheet" href="style.css">
     <script src="animations.js"></script>
-    <!-- 内联样式保持不变 -->
     <style>
-        /* 欢迎页专属样式增强版 */
+        /* 欢迎页专属样式 - 移动优先 */
         .welcome-container {
             animation: fadeIn 2s ease-out;
             position: relative;
         }
         
-        /* ... 其余内联样式保持不变 ... */
-    </style>
-</head>
-<body>
-    <!-- 页面内容保持不变 -->
-</body>
-</html>```
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>爱的邀约</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="animations.js"></script>
-    <!-- 内联样式保持不变 -->
-    <style>
-        /* 欢迎页专属样式增强版 */
-        .welcome-container {
-            animation: fadeIn 2s ease-out;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .welcome-text {
+            animation: slideUp 1.5s ease-out 0.3s both;
+            max-width: 90%;
+            margin: 0 auto 30px;
+            color: #333;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 使用视口单位设置字体大小 */
+        .welcome-title {
+            font-size: 8vw !important; /* 使用视口宽度的8% */
+            margin-bottom: 20px;
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
+            animation: pulse 2s ease-in-out infinite alternate;
             position: relative;
+            line-height: 1.2;
         }
         
-        /* ... 其余内联样式保持不变 ... */
+        /* 确保标题在大屏幕上不会太大 */
+        @media (min-width: 768px) {
+            .welcome-title {
+                font-size: 5em !important;
+            }
+        }
+        
+        /* 其他内联样式保持不变，但确保使用响应式单位 */
+        .welcome-subtitle {
+            font-size: 5vw !important;
+            margin-bottom: 30px;
+            color: #ff69b4;
+            animation: fadeIn 1.8s ease-out 0.6s both;
+        }
+        
+        @media (min-width: 768px) {
+            .welcome-subtitle {
+                font-size: 2em !important;
+            }
+        }
+        
+        .enter-btn {
+            background: linear-gradient(135deg, #ff69b4, #ff85c0);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 5vw !important;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(255,105,180,0.3);
+            transition: all 0.3s ease;
+            animation: bounce 2s ease-in-out infinite alternate 1s;
+            position: relative;
+            overflow: hidden;
+            min-width: 200px;
+        }
+        
+        @media (min-width: 768px) {
+            .enter-btn {
+                font-size: 1.5em !important;
+            }
+        }
+        
+        /* 保留其他动画效果 */
+        .welcome-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, #ff69b4, transparent);
+            animation: titleLine 3s ease-in-out infinite;
+        }
+        
+        @keyframes titleLine {
+            0%, 100% { width: 100px; opacity: 0.5; }
+            50% { width: 200px; opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        
+        .enter-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            animation: glowPulse 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1); opacity: 0.6; }
+        }
     </style>
 </head>
 <body>
     <!-- 页面内容保持不变 -->
+    <div class="hearts"></div>
+    <div class="welcome-container container">
+        <h1 class="welcome-title">爱的邀约</h1>
+        <h2 class="welcome-subtitle">你愿意做我的恋人吗？</h2>
+        <div class="welcome-text">
+            <p>这是一个特别的邀请，希望你能给我一个机会</p>
+            <p>让我用一生的时间去爱你、保护你、珍惜你</p>
+        </div>
+        <button class="enter-btn" onclick="window.location.href='love.html'">打开告白信</button>
+    </div>
 </body>
-</html>```
-
-2. 更新style.css文件，使其能够正确匹配HTML中的容器类名并提供更强大的响应式支持：
-
-```css:c%3A%5CUsers%5CAdmin%5CDesktop%5CYY%5Cloveyaoyao%5Cstyle.css
-/* 全局样式 - 增加响应式设计 */
-body {
-    margin: 0;
-    padding: 0;
-    /* 平滑粉色渐变背景 */
-    background: linear-gradient(120deg, #ff85c0 0%, #ff94c2 20%, #ffb6d9 40%, #ffccd9 60%, #ffd9e6 80%, #fff0f6 100%);
-    background-size: 200% 200%;
-    animation: gradientMove 15s ease infinite;
-    overflow-x: hidden; /* 防止水平滚动 */
-    position: relative;
-    min-height: 100vh;
-    -webkit-text-size-adjust: none; /* 防止iOS自动调整字体大小 */
-}
-
-/* 平滑背景渐变动画 */
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* 柔和光晕效果 */
-body::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
-    animation: glow 8s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-    0% { transform: scale(1); opacity: 0.4; }
-    100% { transform: scale(1.1); opacity: 0.6; }
-}
-
-/* 保留爱心雨动画 */
-.hearts {
-    position: fixed;
-    top: -50px;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.heart {
-    position: absolute;
-    animation: fall linear infinite;
-    font-size: 25px;
-    opacity: 0.7;
-    color: #ff6699;
-}
-
-@keyframes fall {
-    to { transform: translateY(105vh) rotate(360deg); }
-}
-
-/* 基础容器样式 - 移动端优先 */
-.container, .welcome-container, .love-container, .yes-container, .no-container {
-    max-width: 90%; /* 移动端使用更宽的宽度 */
-    margin: 20px auto; /* 减少外边距 */
-    padding: 20px; /* 减少内边距 */
-    text-align: center;
-    background: rgba(255, 255, 255, 0.95); /* 增加透明度以适应小屏幕 */
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(255,0,150,0.1);
-    box-sizing: border-box;
-    width: 100%; /* 确保在小屏幕上占满宽度 */
-    max-width: 95vw; /* 使用视口宽度单位 */
-}
-
-/* 基础按钮样式 - 移动端优先 */
-button {
-    padding: 15px 30px;
-    margin: 10px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-sizing: border-box;
-    min-width: 120px; /* 确保按钮有最小宽度 */
-    -webkit-tap-highlight-color: transparent; /* 去除点击高亮效果 */
-}
-
-.yes {
-    background: #ff69b4;
-    color: white;
-}
-
-.no {
-    background: #f0f0f0;
-    color: #666;
-}
-
-button:hover,
-button:active {
-    transform: scale(1.05); /* 略微缩小放大效果 */
-    box-shadow: 0 5px 15px rgba(255,105,180,0.3);
-}
-
-.content {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #666;
-    margin: 20px 0;
-    word-wrap: break-word; /* 防止长单词破坏布局 */
-}
-
-/* 媒体查询 - 小屏幕手机 (360px以下) */
-@media (max-width: 360px) {
-    .welcome-container, .love-container, .yes-container, .no-container {
-        padding: 15px;
-        margin: 10px auto;
-    }
-    
-    button {
-        padding: 12px 24px;
-        font-size: 14px;
-        min-width: 100px;
-    }
-    
-    .welcome-title, .love-title, .yes-title, .no-title {
-        font-size: 1.8em !important;
-    }
-    
-    .welcome-subtitle, .love-subtitle {
-        font-size: 1.1em !important;
-    }
-    
-    .sad-face {
-        font-size: 5em !important;
-    }
-}
-
-/* 媒体查询 - 中等屏幕手机 (361px - 767px) */
-@media (min-width: 361px) and (max-width: 767px) {
-    .welcome-container, .love-container, .yes-container, .no-container {
-        padding: 15-20px;
-        margin: 15px auto;
-    }
-    
-    button {
-        padding: 14px 28px;
-        font-size: 15px;
-        min-width: 110px;
-    }
-    
-    .welcome-title, .love-title, .yes-title, .no-title {
-        font-size: 2.2em !important;
-    }
-    
-    .welcome-subtitle, .love-subtitle {
-        font-size: 1.2em !important;
-    }
-    
-    .sad-face {
-        font-size: 6em !important;
-    }
-}
-
-/* 媒体查询 - 平板设备 */
-@media (min-width: 768px) {
-    .welcome-container, .love-container, .yes-container, .no-container {
-        max-width: 700px;
-        margin: 40px auto;
-        padding: 30px;
-    }
-    
-    button {
-        padding: 15px 30px;
-        margin: 20px;
-        font-size: 18px;
-    }
-    
-    .content {
-        font-size: 18px;
-        margin: 40px 0;
-    }
-}
-
-/* 媒体查询 - 桌面设备 */
-@media (min-width: 1024px) {
-    .welcome-container, .love-container, .yes-container, .no-container {
-        max-width: 800px;
-        margin: 50px auto;
-    }
-}
-
-/* 告白页特定样式 */
-.love-buttons {
-    display: flex;
-    justify-content: center;
-    flex-direction: column; /* 移动端垂直排列按钮 */
-    align-items: center;
-    gap: 15px;
-    margin-top: 30px;
-}
-
-/* 在平板及以上设备上水平排列按钮 */
-@media (min-width: 768px) {
-    .love-buttons {
-        flex-direction: row;
-        gap: 30px;
-    }
-}
-
-/* 修复HTML内联样式覆盖问题 */
-.welcome-title, .love-title, .yes-title, .no-title {
-    font-size: 2.2em !important; /* 强制应用此大小 */
-    line-height: 1.2 !important;
-}
-
-/* 确保文字在小屏幕上正常显示 */
-.yes-content p, .no-content p, .love-content {
-    font-size: 16px !important;
-    line-height: 1.6 !important;
-    word-wrap: break-word;
-    padding: 5px 0;
-}
-
-/* 调整爱心动画大小以适应移动设备 */
-.heart {
-    font-size: 20px;
-}
-
-/* 在大屏幕上增加爱心大小 */
-@media (min-width: 768px) {
-    .heart {
-        font-size: 25px;
-    }
-}```
-
-3. 修改animations.js文件，确保动画在移动设备上运行流畅：
-
-```javascript:c%3A%5CUsers%5CAdmin%5CDesktop%5CYY%5Cloveyaoyao%5Canimations.js
-// 检查是否是移动设备
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-// 根据设备调整动画性能
-function adjustAnimationsForDevice() {
-    // 移动设备上禁用或简化某些复杂动画
-    if (isMobile) {
-        // 减少爱心数量
-        const hearts = document.querySelectorAll('.heart');
-        if (hearts.length > 20) {
-            for (let i = 20; i < hearts.length; i++) {
-                hearts[i].remove();
-            }
-        }
-        
-        // 调整动画时间
-        const animatedElements = document.querySelectorAll('[style*="animation-duration"]');
-        animatedElements.forEach(el => {
-            const currentDuration = parseFloat(el.style.animationDuration || getComputedStyle(el).animationDuration);
-            if (currentDuration < 2) {
-                el.style.animationDuration = (currentDuration * 1.5) + 's';
-            }
-        });
-    }
-}
-
-// 原来的爱心雨函数
-function createHearts() {
-    const heartsContainer = document.querySelector('.hearts');
-    if (!heartsContainer) return;
-    
-    // 根据设备调整生成的爱心数量
-    const heartCount = isMobile ? 15 : 30;
-    
-    for (let i = 0; i < heartCount; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.innerHTML = '❤';
-        
-        // 随机位置和动画时间
-        const leftPos = Math.random() * 100;
-        const size = Math.random() * 20 + 15;
-        const duration = Math.random() * 10 + 10;
-        const delay = Math.random() * 5;
-        
-        heart.style.left = leftPos + 'vw';
-        heart.style.fontSize = size + 'px';
-        heart.style.animationDuration = duration + 's';
-        heart.style.animationDelay = delay + 's';
-        heart.style.opacity = Math.random() * 0.5 + 0.3;
-        
-        heartsContainer.appendChild(heart);
-    }
-}
-
-// 页面加载完成后执行
-window.addEventListener('load', () => {
-    createHearts();
-    adjustAnimationsForDevice();
-});```
+</html>
