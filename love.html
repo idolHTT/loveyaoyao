@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- 优化viewport设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>告白信</title>
     <link rel="stylesheet" href="style.css">
     <script src="animations.js"></script>
     <style>
-        /* 告白页专属动画 */
+        /* 告白页专属动画 - 移动优先 */
         .love-container {
             animation: pageFadeIn 1.5s ease-out;
             position: relative;
@@ -16,13 +18,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* 标题动画 */
+        /* 标题动画 - 使用视口单位 */
         .love-title {
-            font-size: 2.5em;
-            margin-bottom: 15px;
+            font-size: 8vw !important;
+            margin-bottom: 4vw;
             color: #ff69b4;
             text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
             animation: titleFloat 3s ease-in-out infinite;
+            line-height: 1.2;
         }
         
         @keyframes titleFloat {
@@ -30,10 +33,10 @@
             50% { transform: translateY(-10px); }
         }
         
-        /* 副标题动画 */
+        /* 副标题动画 - 使用视口单位 */
         .love-subtitle {
-            font-size: 1.8em;
-            margin-bottom: 30px;
+            font-size: 5.5vw !important;
+            margin-bottom: 5vw;
             color: #ff85c0;
             animation: subtitleSlideIn 1.5s ease-out 0.5s both;
         }
@@ -43,17 +46,17 @@
             to { opacity: 1; transform: translateX(0); }
         }
         
-        /* 告白内容动画 */
+        /* 告白内容动画 - 移动优先 */
         .love-content {
-            font-size: 1.2em;
-            line-height: 1.8;
+            font-size: 4.5vw !important;
+            line-height: 1.8 !important;
             color: #444;
-            margin: 40px auto;
-            max-width: 600px;
+            margin: 5vw auto !important;
+            max-width: 90%;
             animation: contentReveal 2s ease-out 1s both;
             position: relative;
-            padding: 20px;
-            border-radius: 15px;
+            padding: 5vw;
+            border-radius: 3vw;
             background: rgba(255, 255, 255, 0.7);
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
@@ -63,12 +66,14 @@
             to { opacity: 1; transform: scale(1); }
         }
         
-        /* 按钮容器 */
+        /* 按钮容器 - 移动端垂直排列 */
         .love-buttons {
-            margin-top: 40px;
+            margin-top: 6vw;
             display: flex;
             justify-content: center;
-            gap: 30px;
+            flex-direction: column;
+            align-items: center;
+            gap: 3vw;
             animation: buttonsSlideUp 2s ease-out 1.5s both;
         }
         
@@ -79,276 +84,504 @@
         
         /* 按钮动画效果增强 */
         .love-button {
-            padding: 18px 40px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            padding: 4vw 8vw !important;
+            font-size: 5vw !important;
+            min-width: 40vw !important;
         }
         
-        .love-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: all 0.6s ease;
-        }
-        
-        .love-button:hover::before {
-            left: 100%;
-        }
-        
-        .love-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-        
-        /* 确认按钮 */
-        .yes-button {
-            background: linear-gradient(135deg, #ff69b4, #ff85c0);
-            color: white;
-        }
-        
-        /* 考虑按钮 - 添加了移动效果防止用户点击 */
-        .no-button {
-            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
-            color: #666;
-        }
-        
-        /* 装饰元素 */
-        .decorative-hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-        
-        .decorative-heart {
-            position: absolute;
-            font-size: 20px;
-            color: #ff69b4;
-            opacity: 0.3;
-        }
-        
-        /* 弹窗样式 */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            z-index: 1000;
-            max-width: 400px;
-            text-align: center;
-            animation: popupAppear 0.5s ease-out;
-        }
-        
-        @keyframes popupAppear {
-            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
-        
-        .popup-backdrop {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-            animation: backdropFade 0.5s ease-out;
-        }
-        
-        @keyframes backdropFade {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .popup-button {
-            background: linear-gradient(135deg, #ff69b4, #ff85c0);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.1em;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .popup-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255,105,180,0.3);
-        }
-        
-        .popup-text {
-            font-size: 1.3em;
-            color: #333;
-            margin-bottom: 15px;
-        }
-        
-        .popup-text-small {
-            font-size: 1em;
-            color: #666;
-            margin-bottom: 20px;
+        /* 平板及以上设备调整 */
+        @media (min-width: 768px) {
+            .love-title {
+                font-size: 2.5em !important;
+            }
+            
+            .love-subtitle {
+                font-size: 1.8em !important;
+            }
+            
+            .love-content {
+                font-size: 1.2em !important;
+                padding: 20px;
+                border-radius: 15px;
+            }
+            
+            .love-buttons {
+                flex-direction: row;
+                gap: 30px;
+            }
+            
+            .love-button {
+                padding: 18px 40px !important;
+                font-size: 1.2em !important;
+                min-width: auto !important;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="hearts" id="heartsContainer"></div>
-    <div class="container love-container">
-        <div class="decorative-hearts" id="decorativeHearts"></div>
-        <h2 class="love-title">致：陈俊瑶</h2>
-        <h3 class="love-subtitle">来自：汪煜博</h3>
+    <div class="hearts"></div>
+    <div class="love-container container">
+        <h1 class="love-title">亲爱的</h1>
+        <h2 class="love-subtitle">我有话想对你说</h2>
         <div class="love-content">
-            <p>每一刻与你相伴，都是美丽的梦境。你的笑容点亮我的世界，你的存在让一切变得更美好。我珍惜我们共同创造的每一个回忆，期待未来创造更多美好时光。</p>
+            <p>从遇见你的那一刻起，我的世界便有了不一样的色彩。</p>
+            <p>你的笑容，你的声音，你的一举一动，都深深印在我的心里。</p>
+            <p>我想和你一起看日出日落，一起走过四季变换。</p>
+            <p>我想把最好的都给你，想在你需要的时候永远在你身边。</p>
+            <p>所以，我想正式问你：</p>
+            <p>你愿意做我的恋人吗？</p>
         </div>
         <div class="love-buttons">
-            <button class="love-button yes-button" onclick="location.href='yes.html'">❤ 我愿意 ❤</button>
-            <button class="love-button no-button" id="noButton">再考虑下</button>
+            <button class="love-button yes" onclick="window.location.href='yes.html'">我愿意</button>
+            <button class="love-button no" id="no-button">不同意</button>
         </div>
-    </div>
-    
-    <!-- 弹窗元素 -->
-    <div class="popup-backdrop" id="popupBackdrop"></div>
-    <div class="popup" id="popup">
-        <div class="popup-text" id="popupText">你不许不同意</div>
-        <div class="popup-text-small" id="popupTextSmall"></div>
-        <button class="popup-button" id="popupButton">好吧</button>
     </div>
     
     <script>
-        // 添加装饰性爱心
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('decorativeHearts');
-            const positions = [
-                { top: '10%', left: '10%', delay: 0 },
-                { top: '20%', left: '90%', delay: 0.5 },
-                { top: '80%', left: '15%', delay: 1 },
-                { top: '70%', left: '85%', delay: 1.5 },
-                { top: '50%', left: '5%', delay: 2 },
-                { top: '50%', left: '95%', delay: 2.5 }
-            ];
-            
-            positions.forEach(pos => {
-                const heart = document.createElement('div');
-                heart.className = 'decorative-heart';
-                heart.innerHTML = '❤';
-                heart.style.top = pos.top;
-                heart.style.left = pos.left;
-                heart.style.animation = `float ${Math.random() * 2 + 3}s ease-in-out infinite ${pos.delay}s`;
-                container.appendChild(heart);
-            });
-            
-            // 添加浮动动画
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes float {
-                    0%, 100% { transform: translateY(0) rotate(0deg); }
-                    25% { transform: translateY(-10px) rotate(5deg); }
-                    50% { transform: translateY(0) rotate(0deg); }
-                    75% { transform: translateY(-10px) rotate(-5deg); }
-                }
-            `;
-            document.head.appendChild(style);
-        });
-        
-        // 不同意按钮的反复弹窗逻辑
+        // 不同意按钮的交互逻辑
         let clickCount = 0;
-        const popupTexts = [
-            {
-                main: "你不许不同意！",
-                small: "我知道你心里是愿意的～"
-            },
-            {
-                main: "再想想嘛～",
-                small: "我们在一起会很开心的！"
-            },
-            {
-                main: "别这么狠心嘛",
-                small: "我的心都要碎了..."
-            },
-            {
-                main: "真的不再考虑一下？",
-                small: "给我一个机会证明我自己！"
-            },
-            {
-                main: "最后再问一次...",
-                small: "我真的很喜欢你！"
-            },
-            {
-                main: "你确定吗？",
-                small: "这是最后一次机会哦..."
-            }
+        const noButton = document.getElementById('no-button');
+        const messageArray = [
+            "你不许不同意！",
+            "再想想嘛～",
+            "别这么狠心嘛",
+            "真的不再考虑一下？",
+            "最后再问一次..."
         ];
         
-        const noButton = document.getElementById('noButton');
-        const popup = document.getElementById('popup');
-        const popupBackdrop = document.getElementById('popupBackdrop');
-        const popupText = document.getElementById('popupText');
-        const popupTextSmall = document.getElementById('popupTextSmall');
-        const popupButton = document.getElementById('popupButton');
-        
-        // 显示弹窗
-        function showPopup() {
-            if (clickCount < popupTexts.length) {
-                popupText.textContent = popupTexts[clickCount].main;
-                popupTextSmall.textContent = popupTexts[clickCount].small;
-                popup.style.display = 'block';
-                popupBackdrop.style.display = 'block';
-                clickCount++;
-            } else {
-                // 第六次点击后跳转到不同意页面
-                location.href = 'no.html';
-            }
-        }
-        
-        // 关闭弹窗
-        function closePopup() {
-            popup.style.display = 'none';
-            popupBackdrop.style.display = 'none';
-        }
-        
-        // 点击不同意按钮
-        noButton.addEventListener('click', showPopup);
-        
-        // 点击弹窗按钮
-        popupButton.addEventListener('click', closePopup);
-        
-        // 点击背景关闭弹窗
-        popupBackdrop.addEventListener('click', closePopup);
-        
-        // 为不同意按钮添加鼠标靠近时的移动效果
-        noButton.addEventListener('mouseenter', function() {
-            // 只有在第一次到第五次弹窗时添加移动效果
+        noButton.addEventListener('mouseover', function() {
+            // 前5次点击时，按钮会躲避鼠标
             if (clickCount < 5) {
-                const x = Math.random() * 100 - 50; // -50 到 50 的随机值
-                const y = Math.random() * 100 - 50; // -50 到 50 的随机值
-                this.style.transform = `translate(${x}px, ${y}px)`;
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                const buttonWidth = this.offsetWidth;
+                const buttonHeight = this.offsetHeight;
+                
+                // 随机生成新位置，但确保按钮不会超出屏幕
+                const maxX = windowWidth - buttonWidth;
+                const maxY = windowHeight - buttonHeight;
+                
+                const newX = Math.random() * maxX;
+                const newY = Math.random() * maxY;
+                
+                // 添加一些边缘检测，确保按钮不会太靠近边缘
+                const safeX = Math.max(20, Math.min(maxX - 20, newX));
+                const safeY = Math.max(20, Math.min(maxY - 20, newY));
+                
+                this.style.position = 'fixed';
+                this.style.left = safeX + 'px';
+                this.style.top = safeY + 'px';
+                this.style.zIndex = '1000';
             }
         });
         
-        noButton.addEventListener('mouseleave', function() {
-            // 鼠标离开时恢复原位
+        noButton.addEventListener('click', function() {
+            clickCount++;
+            
             if (clickCount < 5) {
-                this.style.transform = 'translate(0, 0)';
+                // 前5次点击显示不同的提示信息
+                alert(messageArray[clickCount - 1]);
+            } else if (clickCount === 5) {
+                // 第6次点击显示最后确认信息
+                if (confirm("你确定吗？")) {
+                    window.location.href = 'no.html';
+                }
+            } else {
+                // 超过5次后直接跳转
+                window.location.href = 'no.html';
             }
         });
     </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 优化viewport设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>太棒了！</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="animations.js"></script>
+    <style>
+        /* 同意页面惊喜效果增强版 - 移动优先 */
+        .yes-container {
+            position: relative;
+            animation: celebrationFadeIn 1.5s ease-out;
+            overflow: hidden;
+        }
+        
+        @keyframes celebrationFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 惊喜标题 - 使用视口单位 */
+        .yes-title {
+            font-size: 8vw !important;
+            color: #ff69b4;
+            margin-bottom: 4vw;
+            text-shadow: 3px 3px 6px rgba(255,105,180,0.4);
+            animation: titlePop 1s ease-out 0.3s both, pulse 2s ease-in-out infinite 1.5s;
+            line-height: 1.2;
+        }
+        
+        @keyframes titlePop {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* 惊喜内容 - 移动优先 */
+        .yes-content {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5vw;
+            border-radius: 3vw;
+            margin: 5vw auto !important;
+            max-width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: contentAppear 1.5s ease-out 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes contentAppear {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .yes-content p {
+            font-size: 4.5vw !important;
+            line-height: 1.8 !important;
+            margin-bottom: 4vw !important;
+            color: #444;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            animation: textAppear 0.8s ease-out both;
+        }
+        
+        /* 文字逐行显示动画 */
+        .yes-content p:nth-child(1) { animation-delay: 1.2s; }
+        .yes-content p:nth-child(2) { animation-delay: 1.6s; }
+        .yes-content p:nth-child(3) { animation-delay: 2.0s; }
+        .yes-content p:nth-child(4) { animation-delay: 2.4s; }
+        .yes-content p:nth-child(5) { animation-delay: 2.8s; }
+        .yes-content p:nth-child(6) { animation-delay: 3.2s; }
+        
+        @keyframes textAppear {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* 装饰元素 */
+        .celebration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* 爱心爆炸效果 */
+        .heart-explosion {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* 平板及以上设备调整 */
+        @media (min-width: 768px) {
+            .yes-title {
+                font-size: 4em !important;
+            }
+            
+            .yes-content {
+                padding: 30px;
+                border-radius: 20px;
+            }
+            
+            .yes-content p {
+                font-size: 1.3em !important;
+                margin-bottom: 20px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts"></div>
+    <div class="yes-container container">
+        <h1 class="yes-title">太棒了！</h1>
+        <div class="yes-content">
+            <p>亲爱的，谢谢你愿意接受我的心意！</p>
+            <p>从今天开始，我会更加珍惜我们在一起的每一刻。</p>
+            <p>我会用我的行动证明，你是我今生最重要的人。</p>
+            <p>无论风雨还是晴天，我都会在你身边。</p>
+            <p>我爱你，不只是今天，而是永远。</p>
+            <p>让我们一起创造属于我们的美好回忆吧！</p>
+        </div>
+        <button class="love-button" onclick="window.location.href='index.html'">返回</button>
+    </div>
+    
+    <script>
+        // 创建爱心爆炸效果
+        function createHeartExplosion() {
+            const container = document.querySelector('.yes-container');
+            const explosion = document.createElement('div');
+            explosion.className = 'heart-explosion';
+            container.appendChild(explosion);
+            
+            // 创建多个爱心碎片
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.style.position = 'absolute';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.color = '#ff69b4';
+                heart.style.opacity = 0.7 + Math.random() * 0.3;
+                heart.style.left = '50%';
+                heart.style.top = '50%';
+                heart.style.transform = 'translate(-50%, -50%)';
+                
+                // 随机动画参数
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 100 + 50;
+                const duration = Math.random() * 2 + 1;
+                const delay = Math.random() * 0.5;
+                
+                // 设置动画
+                heart.style.transition = `all ${duration}s cubic-bezier(0.17, 0.55, 0.55, 1) ${delay}s`;
+                
+                explosion.appendChild(heart);
+                
+                // 触发动画
+                setTimeout(() => {
+                    const x = Math.cos(angle) * distance;
+                    const y = Math.sin(angle) * distance;
+                    heart.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random() * 360}deg)`;
+                    heart.style.opacity = '0';
+                }, 10);
+            }
+            
+            // 移除爆炸效果
+            setTimeout(() => {
+                explosion.remove();
+            }, 3000);
+        }
+        
+        // 页面加载后触发爆炸效果
+        window.addEventListener('load', function() {
+            // 延迟触发爆炸效果
+            setTimeout(createHeartExplosion, 1000);
+            
+            // 定期触发爆炸效果
+            setInterval(createHeartExplosion, 5000);
+        });
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 优化viewport设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>难过...</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="animations.js"></script>
+    <style>
+        /* 悲伤风格的不同意页面 - 移动优先 */
+        .no-container {
+            position: relative;
+            animation: sadFadeIn 2s ease-out;
+            overflow: hidden;
+        }
+        
+        @keyframes sadFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 悲伤标题 - 使用视口单位 */
+        .no-title {
+            font-size: 8vw !important;
+            color: #666;
+            margin-bottom: 4vw;
+            animation: sadFloat 4s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.2;
+        }
+        
+        @keyframes sadFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* 悲伤表情 - 使用视口单位 */
+        .sad-face {
+            font-size: 20vw !important;
+            margin: 5vw 0 !important;
+            animation: sadFace 2s ease-in-out infinite;
+        }
+        
+        @keyframes sadFace {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        
+        /* 悲伤内容 - 移动优先 */
+        .no-content {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 5vw;
+            border-radius: 3vw;
+            margin: 5vw auto !important;
+            max-width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: contentAppear 1.5s ease-out 0.6s both;
+            position: relative;
+        }
+        
+        @keyframes contentAppear {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .no-content p {
+            font-size: 4.5vw !important;
+            line-height: 1.8 !important;
+            margin-bottom: 4vw !important;
+            color: #555;
+        }
+        
+        /* 眼泪效果 */
+        .tears {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 50px;
+            pointer-events: none;
+        }
+        
+        .tear {
+            position: absolute;
+            width: 10px;
+            height: 15px;
+            background: rgba(173, 216, 230, 0.7);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: tearFall 2s linear infinite;
+        }
+        
+        .tear-left {
+            left: -20px;
+        }
+        
+        .tear-right {
+            right: -20px;
+        }
+        
+        @keyframes tearFall {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100px) scale(0.8);
+                opacity: 0;
+            }
+        }
+        
+        /* 飘动的乌云背景 */
+        .clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.2;
+        }
+        
+        .cloud {
+            position: absolute;
+            font-size: 100px;
+            animation: cloudFloat linear infinite;
+        }
+        
+        @keyframes cloudFloat {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100vw);
+            }
+        }
+        
+        /* 平板及以上设备调整 */
+        @media (min-width: 768px) {
+            .no-title {
+                font-size: 3em !important;
+            }
+            
+            .sad-face {
+                font-size: 8em !important;
+                margin: 40px 0 !important;
+            }
+            
+            .no-content {
+                padding: 30px;
+                border-radius: 20px;
+                margin: 30px auto !important;
+            }
+            
+            .no-content p {
+                font-size: 1.2em !important;
+                margin-bottom: 15px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts"></div>
+    <div class="no-container container">
+        <h1 class="no-title">难过...</h1>
+        <div class="sad-face">😢</div>
+        <div class="no-content">
+            <p>听到这个答案，我的心里真的很难过。</p>
+            <p>但是我尊重你的选择，也理解感情不能勉强。</p>
+            <p>也许我们还可以做朋友，或者给我一些时间让我继续喜欢你。</p>
+            <p>无论如何，我希望你能永远幸福快乐。</p>
+            <p>如果你改变主意了，我会一直在原地等你。</p>
+        </div>
+        <button class="love-button" onclick="window.location.href='love.html'">返回</button>
+        
+        <!-- 眼泪效果 -->
+        <div class="tears">
+            <div class="tear tear-left"></div>
+            <div class="tear tear-right" style="animation-delay: 1s"></div>
+            <div class="tear tear-left" style="animation-delay: 2s"></div>
+            <div class="tear tear-right" style="animation-delay: 3s"></div>
+        </div>
+        
+        <!-- 飘动的乌云 -->
+        <div class="clouds">
+            <div class="cloud" style="top: 10%; left: -200px; animation-duration: 30s">☁️</div>
+            <div class="cloud" style="top: 20%; left: -300px; animation-duration: 45s; animation-delay: 5s">☁️</div>
+            <div class="cloud" style="top: 15%; left: -150px; animation-duration: 35s; animation-delay: 10s">☁️</div>
+        </div>
+    </div>
 </body>
 </html>
