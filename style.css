@@ -1,14 +1,25 @@
 /* 全局样式 - 增加响应式设计 */
-body {
+/* 基础样式重置 */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 !important;
+    padding: 0 !important;
     /* 平滑粉色渐变背景 */
-    background: linear-gradient(120deg, #ff85c0 0%, #ff94c2 20%, #ffb6d9 40%, #ffccd9 60%, #ffd9e6 80%, #fff0f6 100%);
-    background-size: 200% 200%;
-    animation: gradientMove 15s ease infinite;
-    overflow-x: hidden; /* 防止水平滚动 */
-    position: relative;
-    min-height: 100vh;
+    background: linear-gradient(120deg, #ff85c0 0%, #ff94c2 20%, #ffb6d9 40%, #ffccd9 60%, #ffd9e6 80%, #fff0f6 100%) !important;
+    background-size: 200% 200% !important;
+    animation: gradientMove 15s ease infinite !important;
+    overflow-x: hidden !important; /* 防止水平滚动 */
+    position: relative !important;
+    min-height: 100vh !important;
+    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif !important; /* 添加中文字体支持 */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 /* 平滑背景渐变动画 */
@@ -28,6 +39,7 @@ body::before {
     height: 200%;
     background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
     animation: glow 8s ease-in-out infinite alternate;
+    pointer-events: none;
 }
 
 @keyframes glow {
@@ -42,6 +54,7 @@ body::before {
     width: 100%;
     height: 100%;
     pointer-events: none;
+    z-index: 1;
 }
 
 .heart {
@@ -56,28 +69,61 @@ body::before {
     to { transform: translateY(105vh) rotate(360deg); }
 }
 
-/* 基础容器样式 - 移动端优先 */
-.container {
-    max-width: 90%; /* 移动端使用更宽的宽度 */
-    margin: 20px auto; /* 减少外边距 */
-    padding: 20px; /* 减少内边距 */
-    text-align: center;
-    background: rgba(255, 255, 255, 0.95); /* 增加透明度以适应小屏幕 */
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(255,0,150,0.1);
-    box-sizing: border-box;
+/* 隐藏水平滚动条，但保留功能 */
+::-webkit-scrollbar {
+    height: 0;
+    width: 0;
 }
 
-/* 基础按钮样式 - 移动端优先 */
+/* 为移动设备优化的触摸反馈 */
 button {
-    padding: 12px 24px; /* 调整按钮大小 */
-    margin: 10px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 为移动设备优化文本选择 */
+@media (max-width: 767px) {
+    * {
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    input, textarea {
+        -webkit-user-select: text;
+        user-select: text;
+    }
+}
+
+/* 其他特定页面样式根据各自HTML文件中的内联样式覆盖 */
+.container {
+    width: 95vw !important; /* 移动端使用视口单位 */
+    max-width: none !important; /* 移除最大宽度限制 */
+    margin: 6vw auto !important; /* 使用视口单位 */
+    padding: 6vw !important; /* 使用视口单位 */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 3vw !important; /* 使用视口单位 */
+    box-shadow: 0 0 20px rgba(255,0,150,0.1);
+    box-sizing: border-box;
+    min-height: 80vh; /* 确保在小屏幕上有足够高度 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* 基础按钮样式 - 移动端优先彻底优化 */
+button {
+    padding: 4vw 8vw !important;
+    margin: 2vw !important;
     border: none;
-    border-radius: 25px;
-    font-size: 16px;
+    border-radius: 3vw !important;
+    font-size: 5vw !important;
     cursor: pointer;
     transition: all 0.3s;
     box-sizing: border-box;
+    min-height: 12vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .yes {
@@ -91,46 +137,95 @@ button {
 }
 
 button:hover {
-    transform: scale(1.05); /* 略微缩小放大效果 */
+    transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(255,105,180,0.3);
 }
 
 .content {
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 4.5vw !important;
+    line-height: 1.8 !important;
     color: #666;
-    margin: 20px 0;
+    margin: 6vw 0 !important;
+}
+
+/* 标题基础样式 - 使用视口单位 */
+h1, h2, h3 {
+    line-height: 1.2 !important;
+    margin-bottom: 4vw !important;
+}
+
+/* 段落基础样式 - 使用视口单位 */
+p {
+    line-height: 1.8 !important;
+    margin-bottom: 4vw !important;
 }
 
 /* 媒体查询 - 平板设备 */
 @media (min-width: 768px) {
     .container {
-        max-width: 700px;
-        margin: 40px auto;
-        padding: 30px;
+        width: 80% !important;
+        max-width: 800px !important;
+        margin: 40px auto !important;
+        padding: 40px !important;
+        border-radius: 20px !important;
     }
     
     button {
-        padding: 15px 30px;
-        margin: 20px;
-        font-size: 18px;
+        padding: 15px 30px !important;
+        margin: 15px !important;
+        font-size: 1.2em !important;
+        border-radius: 30px !important;
+        min-height: auto;
     }
     
     .content {
-        font-size: 18px;
-        margin: 40px 0;
+        font-size: 1.2em !important;
+        margin: 30px 0 !important;
+    }
+    
+    h1, h2, h3 {
+        margin-bottom: 20px !important;
+    }
+    
+    p {
+        margin-bottom: 20px !important;
     }
 }
 
 /* 媒体查询 - 桌面设备 */
 @media (min-width: 1024px) {
     .container {
-        max-width: 800px;
-        margin: 50px auto;
+        max-width: 900px !important;
+        margin: 50px auto !important;
+        padding: 50px !important;
     }
 }
 
-/* 欢迎页特定响应式样式 */
+/* 隐藏水平滚动条，但保留功能 */
+::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+}
+
+/* 为移动设备优化的触摸反馈 */
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 为移动设备优化文本选择 */
+@media (max-width: 767px) {
+    * {
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    input, textarea {
+        -webkit-user-select: text;
+        user-select: text;
+    }
+}
+
+/* 其他特定页面样式保持不变 */
 .welcome-title {
     font-size: 2.5em; /* 移动端较小字体 */
     margin-bottom: 20px;

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- 优化viewport设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>太棒了！</title>
     <link rel="stylesheet" href="style.css">
     <script src="animations.js"></script>
@@ -17,13 +19,14 @@
             to { opacity: 1; }
         }
         
-        /* 惊喜标题 */
+        /* 惊喜标题 - 使用视口单位 */
         .yes-title {
-            font-size: 4em;
+            font-size: 8vw !important;
             color: #ff69b4;
-            margin-bottom: 20px;
+            margin-bottom: 4vw;
             text-shadow: 3px 3px 6px rgba(255,105,180,0.4);
             animation: titlePop 1s ease-out 0.3s both, pulse 2s ease-in-out infinite 1.5s;
+            line-height: 1.2;
         }
         
         @keyframes titlePop {
@@ -37,13 +40,13 @@
             50% { transform: scale(1.05); }
         }
         
-        /* 惊喜内容 */
+        /* 惊喜内容 - 移动优先 */
         .yes-content {
             background: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 20px;
-            margin: 40px auto;
-            max-width: 700px;
+            padding: 5vw;
+            border-radius: 3vw;
+            margin: 5vw auto !important;
+            max-width: 90%;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             animation: contentAppear 1.5s ease-out 0.6s both;
             position: relative;
@@ -56,14 +59,25 @@
         }
         
         .yes-content p {
-            font-size: 1.3em;
-            line-height: 1.8;
-            margin-bottom: 20px;
+            font-size: 4.5vw !important;
+            line-height: 1.8 !important;
+            margin-bottom: 4vw !important;
             color: #444;
             position: relative;
             z-index: 2;
             opacity: 0;
             animation: textAppear 0.8s ease-out both;
+        }
+        
+        /* 平板及以上设备调整 */
+        @media (min-width: 768px) {
+            .yes-title {
+                font-size: 3.5em !important;
+            }
+            
+            .yes-content p {
+                font-size: 1.3em !important;
+            }
         }
         
         /* 文字逐行显示动画 */
@@ -308,7 +322,7 @@
             <div class="celebration"></div>
             <p>亲爱的瑶瑶：</p>
             <p>当你看到这段话时，我想告诉你——你让我感到无比幸福和幸运！你的每一个微笑、每一个眼神、每一个动作，都深深地刻在我的心里。</p>
-            <p>从遇见你的那一刻起，我的生活变得更加美好。和你在一起的时光，是我生命中最珍贵的宝藏。</p>
+            <p>从遇见你的那一刻起，我的生活变得更好。和你在一起的时光，是我生命中最珍贵的宝藏。</p>
             <p>我期待着未来的每一天，期待着和你一起经历更多美好的事情，期待着创造属于我们的故事。</p>
             <p>谢谢你愿意成为我生命中的一部分，我爱你！</p>
             <p>永远爱你的，煜博</p>

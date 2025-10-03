@@ -7,10 +7,20 @@
     <link rel="stylesheet" href="style.css">
     <script src="animations.js"></script>
     <style>
-        /* 告白页专属动画 - 移动优先 */
+        /* 告白页专属动画 - 移动优先，确保覆盖全局样式 */
         .love-container {
             animation: pageFadeIn 1.5s ease-out;
             position: relative;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            min-height: 100vh !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+            background: transparent !important;
+            box-shadow: none !important;
         }
         
         @keyframes pageFadeIn {
@@ -18,14 +28,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* 标题动画 - 使用视口单位 */
+        /* 标题动画 - 增大视口单位比例 */
         .love-title {
-            font-size: 8vw !important;
-            margin-bottom: 4vw;
+            font-size: 12vw !important; /* 增大到视口宽度的12% */
+            margin-bottom: 6vw !important;
             color: #ff69b4;
-            text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
+            text-shadow: 3px 3px 6px rgba(255,105,180,0.4);
             animation: titleFloat 3s ease-in-out infinite;
-            line-height: 1.2;
+            line-height: 1.2 !important;
+            z-index: 10;
         }
         
         @keyframes titleFloat {
@@ -33,12 +44,13 @@
             50% { transform: translateY(-10px); }
         }
         
-        /* 副标题动画 - 使用视口单位 */
+        /* 副标题动画 - 增大视口单位比例 */
         .love-subtitle {
-            font-size: 5.5vw !important;
-            margin-bottom: 5vw;
+            font-size: 7vw !important; /* 增大到视口宽度的7% */
+            margin-bottom: 8vw !important;
             color: #ff85c0;
             animation: subtitleSlideIn 1.5s ease-out 0.5s both;
+            z-index: 10;
         }
         
         @keyframes subtitleSlideIn {
@@ -46,19 +58,26 @@
             to { opacity: 1; transform: translateX(0); }
         }
         
-        /* 告白内容动画 - 移动优先 */
+        /* 告白内容动画 - 移动优先，确保居中放大 */
         .love-content {
-            font-size: 4.5vw !important;
-            line-height: 1.8 !important;
+            font-size: 5.5vw !important; /* 增大到视口宽度的5.5% */
+            line-height: 2 !important;
             color: #444;
-            margin: 5vw auto !important;
-            max-width: 90%;
+            margin: 6vw auto !important;
+            max-width: 90% !important;
+            width: 90% !important;
             animation: contentReveal 2s ease-out 1s both;
             position: relative;
-            padding: 5vw;
-            border-radius: 3vw;
-            background: rgba(255, 255, 255, 0.7);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 6vw !important;
+            border-radius: 4vw !important;
+            background: rgba(255, 255, 255, 0.9) !important;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1) !important;
+            z-index: 10;
+        }
+        
+        .love-content p {
+            margin-bottom: 6vw !important;
+            font-size: inherit !important;
         }
         
         @keyframes contentReveal {
@@ -68,13 +87,14 @@
         
         /* 按钮容器 - 移动端垂直排列 */
         .love-buttons {
-            margin-top: 6vw;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-            gap: 3vw;
+            margin-top: 8vw !important;
+            display: flex !important;
+            justify-content: center !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 5vw !important;
             animation: buttonsSlideUp 2s ease-out 1.5s both;
+            z-index: 10;
         }
         
         @keyframes buttonsSlideUp {
@@ -82,45 +102,115 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* 按钮动画效果增强 */
+        /* 按钮动画效果增强 - 增大按钮尺寸 */
         .love-button {
-            padding: 4vw 8vw !important;
-            font-size: 5vw !important;
-            min-width: 40vw !important;
+            padding: 5vw 12vw !important; /* 增大按钮内边距 */
+            font-size: 6vw !important; /* 增大按钮字体 */
+            min-width: 60vw !important; /* 增大按钮最小宽度 */
+            border-radius: 5vw !important; /* 增大圆角 */
+            font-weight: bold !important;
+            box-shadow: 0 8px 16px rgba(255,105,180,0.3) !important;
+        }
+        
+        .love-button.yes {
+            background: linear-gradient(135deg, #ff69b4, #ff85c0) !important;
+            color: white !important;
+        }
+        
+        .love-button.no {
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0) !important;
+            color: #666 !important;
+        }
+        
+        /* 容器 - 确保全屏覆盖 */
+        .container {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            min-height: 100vh !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+        }
+        
+        /* 确保body全屏 */
+        body {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            min-height: 100vh !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         
         /* 平板及以上设备调整 */
         @media (min-width: 768px) {
             .love-title {
-                font-size: 2.5em !important;
+                font-size: 3.5em !important;
             }
             
             .love-subtitle {
-                font-size: 1.8em !important;
+                font-size: 2em !important;
             }
             
             .love-content {
-                font-size: 1.2em !important;
-                padding: 20px;
-                border-radius: 15px;
+                font-size: 1.3em !important;
+                padding: 30px !important;
+                border-radius: 20px !important;
+                max-width: 700px !important;
+                margin: 30px auto !important;
             }
             
             .love-buttons {
-                flex-direction: row;
-                gap: 30px;
+                flex-direction: row !important;
+                gap: 20px !important;
+                margin-top: 40px !important;
             }
             
             .love-button {
                 padding: 18px 40px !important;
                 font-size: 1.2em !important;
-                min-width: auto !important;
+                min-width: 150px !important;
+                border-radius: 30px !important;
             }
+            
+            .container {
+                max-width: 900px !important;
+                margin: 40px auto !important;
+                padding: 40px !important;
+            }
+        }
+        
+        /* 爱心装饰效果 - 可选 */
+        .love-decoration {
+            position: absolute;
+            font-size: 5vw;
+            color: #ff69b4;
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(10px) rotate(-5deg); }
+            75% { transform: translateY(-15px) rotate(5deg); }
         }
     </style>
 </head>
 <body>
     <div class="hearts"></div>
     <div class="love-container container">
+        <!-- 添加装饰爱心 -->
+        <div class="love-decoration" style="top: 10%; left: 10%;">❤️</div>
+        <div class="love-decoration" style="top: 20%; right: 15%;">💕</div>
+        <div class="love-decoration" style="bottom: 15%; left: 20%;">💖</div>
+        <div class="love-decoration" style="bottom: 10%; right: 10%;">💘</div>
+        
         <h1 class="love-title">亲爱的</h1>
         <h2 class="love-subtitle">我有话想对你说</h2>
         <div class="love-content">
