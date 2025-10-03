@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>爱的邀约</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="animations.js"></script>
+    <style>
+        /* 欢迎页专属样式增强版 */
+        .welcome-container {
+            animation: fadeIn 2s ease-out;
+            position: relative;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .welcome-text {
+            animation: slideUp 1.5s ease-out 0.3s both;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #333;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .welcome-title {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
+            animation: pulse 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+        
+        /* 添加标题装饰效果 */
+        .welcome-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, #ff69b4, transparent);
+            animation: titleLine 3s ease-in-out infinite;
+        }
+        
+        @keyframes titleLine {
+            0%, 100% { width: 100px; opacity: 0.5; }
+            50% { width: 200px; opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        
+        .welcome-subtitle {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #ff69b4;
+            animation: fadeIn 1.8s ease-out 0.6s both;
+        }
+        
+        .enter-btn {
+            background: linear-gradient(135deg, #ff69b4, #ff85c0);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(255,105,180,0.3);
+            transition: all 0.3s ease;
+            animation: bounce 2s ease-in-out infinite alternate 1s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 按钮发光效果 */
+        .enter-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            animation: glowPulse 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1); opacity: 0.6; }
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        
+        .enter-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(255,105,180,0.4);
+        }
+        
+        .date-display {
+            font-size: 1.2em;
+            color: #666;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-out 1s both;
+        }
+        
+        /* 新的欢迎元素：随机漂浮文字 */
+        .floating-words {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-word {
+            position: absolute;
+            font-size: 1.2em;
+            color: rgba(255,105,180,0.3);
+            font-weight: bold;
+            animation: floatWord linear infinite;
+        }
+        
+        @keyframes floatWord {
+            0% {
+                transform: translateX(-100%) translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateX(100vw) translateY(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="heartsContainer"></div>
+    <div class="floating-words" id="floatingWords"></div>
+    <div class="container welcome-container">
+        <h1 class="welcome-title">💖 爱的告白 💖</h1>
+        <h2 class="welcome-subtitle">一个特别的时刻，只属于你和我</h2>
+        <div class="welcome-text">
+            <p>在这个充满爱意的时刻，我精心准备了一份心意</p>
+            <p>每一个字，每一个符号，都承载着我对你的情感</p>
+            <p>请点击下方按钮，开启这段浪漫之旅</p>
+        </div>
+        <button class="enter-btn" onclick="location.href='love.html'">开启告白之旅 ❤️</button>
+        <div class="date-display"><span id="currentDate"></span></div>
+    </div>
+    
+    <script>
+        // 显示当前日期
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = '今天是 ' + now.toLocaleDateString('zh-CN', options);
+            
+            // 创建漂浮文字
+            createFloatingWords();
+        });
+        
+        // 创建漂浮文字
+        function createFloatingWords() {
+            const container = document.getElementById('floatingWords');
+            const words = ['爱', '喜欢', '幸福', '快乐', '永远', '珍惜', '美好', '相遇', '心动', '浪漫'];
+            
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const word = document.createElement('div');
+                    word.className = 'floating-word';
+                    word.textContent = words[Math.floor(Math.random() * words.length)];
+                    word.style.top = Math.random() * 80 + 10 + '%';
+                    word.style.animationDuration = Math.random() * 20 + 15 + 's';
+                    word.style.animationDelay = Math.random() * 10 + 's';
+                    container.appendChild(word);
+                }, i * 1000);
+            }
+        }
+    </script>
+</body>
+</html>

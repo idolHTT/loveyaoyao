@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>难过...</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="animations.js"></script>
+    <style>
+        /* 悲伤风格的不同意页面 */
+        .no-container {
+            position: relative;
+            animation: sadFadeIn 2s ease-out;
+            overflow: hidden;
+        }
+        
+        @keyframes sadFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 悲伤标题 */
+        .no-title {
+            font-size: 3em;
+            color: #666;
+            margin-bottom: 20px;
+            animation: sadFloat 4s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        @keyframes sadFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* 悲伤表情 */
+        .sad-face {
+            font-size: 8em;
+            margin: 40px 0;
+            animation: sadFace 2s ease-in-out infinite;
+        }
+        
+        @keyframes sadFace {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        
+        /* 悲伤内容 */
+        .no-content {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: contentAppear 1.5s ease-out 0.6s both;
+            position: relative;
+        }
+        
+        @keyframes contentAppear {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .no-content p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        /* 眼泪效果 */
+        .tears {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 50px;
+            pointer-events: none;
+        }
+        
+        .tear {
+            position: absolute;
+            width: 10px;
+            height: 15px;
+            background: rgba(173, 216, 230, 0.7);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: tearFall 2s linear infinite;
+        }
+        
+        .tear-left {
+            left: -20px;
+        }
+        
+        .tear-right {
+            right: -20px;
+        }
+        
+        @keyframes tearFall {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(10px) scale(0.8);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(30px) scale(0.5);
+                opacity: 0;
+            }
+        }
+        
+        /* 返回按钮 */
+        .back-button {
+            background: linear-gradient(135deg, #a0a0a0, #808080);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            animation: buttonAppear 1.5s ease-out 1s both;
+        }
+        
+        @keyframes buttonAppear {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        /* 乌云背景 */
+        .clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: rgba(200, 200, 200, 0.3);
+            border-radius: 50px;
+            animation: cloudMove linear infinite;
+        }
+        
+        @keyframes cloudMove {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100vw); }
+        }
+    </style>
+</head>
+<body style="background: linear-gradient(120deg, #e0e0e0, #f0f0f0);">
+    <div class="hearts" id="heartsContainer" style="display: none;"></div>
+    <div class="container no-container">
+        <div class="clouds" id="clouds"></div>
+        
+        <h1 class="no-title">我很难过...</h1>
+        
+        <div class="sad-face">😢</div>
+        
+        <div class="no-content">
+            <p>亲爱的瑶瑶：</p>
+            <p>当看到你的选择时，我的心里真的很失落...</p>
+            <p>虽然很难过，但我尊重你的决定。也许我还不够好，还需要更多的时间和努力。</p>
+            <p>无论如何，我会永远记得和你在一起的美好时光。希望你能找到属于自己的幸福。</p>
+            <p>如果你改变主意了，我会一直在原地等你...</p>
+            <p>依然爱你的，煜博</p>
+        </div>
+        
+        <button class="back-button" onclick="location.href='love.html'">再给我一次机会</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 创建眼泪效果
+            createTears();
+            
+            // 创建乌云背景
+            createClouds();
+        });
+        
+        // 创建眼泪效果
+        function createTears() {
+            const sadFace = document.querySelector('.sad-face');
+            const tearsContainer = document.createElement('div');
+            tearsContainer.className = 'tears';
+            sadFace.parentNode.insertBefore(tearsContainer, sadFace.nextSibling);
+            
+            // 左眼眼泪
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const tear = document.createElement('div');
+                    tear.className = 'tear tear-left';
+                    tear.style.animationDelay = i * 2 + 's';
+                    tearsContainer.appendChild(tear);
+                }, i * 2000);
+            }
+            
+            // 右眼眼泪
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const tear = document.createElement('div');
+                    tear.className = 'tear tear-right';
+                    tear.style.animationDelay = i * 2 + 1 + 's';
+                    tearsContainer.appendChild(tear);
+                }, i * 2000 + 1000);
+            }
+        }
+        
+        // 创建乌云背景
+        function createClouds() {
+            const container = document.getElementById('clouds');
+            
+            for (let i = 0; i < 5; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                
+                // 随机大小和位置
+                const width = Math.random() * 200 + 100;
+                const height = Math.random() * 80 + 50;
+                const top = Math.random() * 60 + 5;
+                const duration = Math.random() * 60 + 30;
+                
+                cloud.style.width = width + 'px';
+                cloud.style.height = height + 'px';
+                cloud.style.top = top + '%';
+                cloud.style.animationDuration = duration + 's';
+                cloud.style.animationDelay = Math.random() * 10 + 's';
+                
+                container.appendChild(cloud);
+            }
+        }
+    </script>
+</body>
+</html>

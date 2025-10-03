@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>太棒了！</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="animations.js"></script>
+    <style>
+        /* 同意页面惊喜效果增强版 */
+        .yes-container {
+            position: relative;
+            animation: celebrationFadeIn 1.5s ease-out;
+            overflow: hidden;
+        }
+        
+        @keyframes celebrationFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 惊喜标题 */
+        .yes-title {
+            font-size: 4em;
+            color: #ff69b4;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(255,105,180,0.4);
+            animation: titlePop 1s ease-out 0.3s both, pulse 2s ease-in-out infinite 1.5s;
+        }
+        
+        @keyframes titlePop {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* 惊喜内容 */
+        .yes-content {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px auto;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: contentAppear 1.5s ease-out 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes contentAppear {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .yes-content p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #444;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            animation: textAppear 0.8s ease-out both;
+        }
+        
+        /* 文字逐行显示动画 */
+        .yes-content p:nth-child(1) { animation-delay: 1.2s; }
+        .yes-content p:nth-child(2) { animation-delay: 1.6s; }
+        .yes-content p:nth-child(3) { animation-delay: 2.0s; }
+        .yes-content p:nth-child(4) { animation-delay: 2.4s; }
+        .yes-content p:nth-child(5) { animation-delay: 2.8s; }
+        .yes-content p:nth-child(6) { animation-delay: 3.2s; }
+        
+        @keyframes textAppear {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* 装饰元素 */
+        .celebration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* 爱心爆炸效果 */
+        .heart-explosion {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        /* 特效按钮 */
+        .surprise-button {
+            background: linear-gradient(135deg, #ff69b4, #ff85c0);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 8px 16px rgba(255,105,180,0.3);
+            transition: all 0.3s ease;
+            animation: buttonBounce 2s ease-in-out infinite alternate 2s;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: buttonAppear 1s ease-out 4s both, buttonBounce 2s ease-in-out infinite alternate 5s;
+        }
+        
+        @keyframes buttonAppear {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes buttonBounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        
+        .surprise-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(255,105,180,0.4);
+        }
+        
+        /* 倒计时效果 */
+        .countdown {
+            font-size: 2em;
+            color: #ff69b4;
+            margin: 20px 0;
+            font-weight: bold;
+            animation: countDownFlash 1s ease-in-out infinite;
+        }
+        
+        @keyframes countDownFlash {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.95); }
+        }
+        
+        /* 照片框架 */
+        .photo-frame {
+            width: 300px;
+            height: 300px;
+            margin: 30px auto;
+            border: 10px solid white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            animation: photoAppear 2s ease-out 1s both;
+            position: relative;
+            opacity: 0;
+            animation: photoAppear 2s ease-out 3.5s both;
+        }
+        
+        @keyframes photoAppear {
+            from { opacity: 0; transform: rotate(-5deg) scale(0.8); }
+            to { opacity: 1; transform: rotate(0) scale(1); }
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffd9da, #ffc3cd, #ffafcc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+        }
+        
+        .photo-frame:hover .photo-placeholder {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        
+        /* 漂浮爱心装饰 */
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 24px;
+            color: #ff69b4;
+            opacity: 0.7;
+        }
+        
+        /* 心形气球 */
+        .balloon {
+            position: absolute;
+            font-size: 30px;
+            color: #ff69b4;
+            animation: balloonFloat linear infinite;
+            opacity: 0;
+            z-index: 0;
+        }
+        
+        @keyframes balloonFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                transform: translateY(90vh) rotate(30deg) scale(1);
+                opacity: 0.8;
+            }
+            90% {
+                transform: translateY(-50px) rotate(-30deg) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        /* 闪光效果 */
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(1px);
+            box-shadow: 0 0 10px 2px white;
+            animation: sparkleFlash 1s ease-out;
+        }
+        
+        @keyframes sparkleFlash {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* 新的惊喜元素：日期倒计时 */
+        .special-date {
+            font-size: 1.2em;
+            color: #ff69b4;
+            margin: 20px 0;
+            font-weight: bold;
+            animation: fadeIn 2s ease-out 4.5s both;
+            opacity: 0;
+        }
+        
+        /* 爱情宣言 */
+        .love-quote {
+            font-size: 1.5em;
+            font-style: italic;
+            color: #ff69b4;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(255,105,180,0.3);
+            animation: fadeIn 2s ease-out 5s both;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 互动触摸效果 */
+        .interactive-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="heartsContainer"></div>
+    <div class="container yes-container">
+        <div class="celebration" id="celebration"></div>
+        
+        <h1 class="yes-title">❤️ 你同意了！❤️</h1>
+        
+        <div class="love-quote">"爱不是彼此凝视，而是一起注视着同一个方向。"</div>
+        
+        <div class="yes-content">
+            <div class="celebration"></div>
+            <p>亲爱的瑶瑶：</p>
+            <p>当你看到这段话时，我想告诉你——你让我感到无比幸福和幸运！你的每一个微笑、每一个眼神、每一个动作，都深深地刻在我的心里。</p>
+            <p>从遇见你的那一刻起，我的生活变得更加美好。和你在一起的时光，是我生命中最珍贵的宝藏。</p>
+            <p>我期待着未来的每一天，期待着和你一起经历更多美好的事情，期待着创造属于我们的故事。</p>
+            <p>谢谢你愿意成为我生命中的一部分，我爱你！</p>
+            <p>永远爱你的，煜博</p>
+        </div>
+        
+        <div class="photo-frame">
+            <div class="photo-placeholder">我们的回忆</div>
+        </div>
+        
+        <div class="special-date" id="specialDate"></div>
+        
+        <button class="surprise-button" onclick="createSurprise()">点击查看惊喜 🎉</button>
+        
+        <div class="floating-hearts" id="floatingHearts"></div>
+        <div class="balloons" id="balloons"></div>
+        
+        <!-- 互动触摸区域 -->
+        <div class="interactive-area" id="interactiveArea"></div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 创建漂浮爱心
+            createFloatingHearts();
+            
+            // 创建心形气球
+            createBalloons();
+            
+            // 显示特殊日期
+            showSpecialDate();
+            
+            // 添加互动触摸效果
+            addInteractiveTouch();
+            
+            // 自动触发第一次惊喜效果
+            setTimeout(createSurprise, 6000);
+        });
+        
+        // 创建漂浮爱心
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.innerHTML = '❤';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = Math.random() * 100 + '%';
+                    heart.style.animation = `floatHeart ${Math.random() * 5 + 10}s linear infinite`;
+                    heart.style.animationDelay = Math.random() * 5 + 's';
+                    heart.style.fontSize = Math.random() * 30 + 10 + 'px';
+                    container.appendChild(heart);
+                }, i * 300);
+            }
+            
+            // 添加浮动动画
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes floatHeart {
+                    0% { transform: translateY(100vh) rotate(0deg); opacity: 0.7; }
+                    100% { transform: translateY(-50px) rotate(360deg); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // 创建心形气球
+        function createBalloons() {
+            const container = document.getElementById('balloons');
+            const colors = ['#ff69b4', '#ff85c0', '#ff99cc', '#ffb6d9', '#ffccd9'];
+            const emojis = ['💖', '💕', '💗', '💓', '💘'];
+            
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+                    balloon.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                    balloon.style.left = Math.random() * 80 + 10 + '%';
+                    balloon.style.animationDuration = Math.random() * 20 + 15 + 's';
+                    balloon.style.animationDelay = Math.random() * 10 + 's';
+                    balloon.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    container.appendChild(balloon);
+                    
+                    // 触发动画
+                    setTimeout(() => {
+                        balloon.style.opacity = '0.8';
+                    }, 10);
+                }, i * 2000);
+            }
+        }
+        
+        // 显示特殊日期倒计时
+        function showSpecialDate() {
+            const now = new Date();
+            const specialDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 100); // 100天后
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('specialDate').textContent = '我们的100天纪念日: ' + specialDate.toLocaleDateString('zh-CN', options);
+        }
+        
+        // 添加互动触摸效果
+        function addInteractiveTouch() {
+            const interactiveArea = document.getElementById('interactiveArea');
+            
+            interactiveArea.addEventListener('click', function(e) {
+                createSparkle(e.clientX, e.clientY);
+                
+                // 随机创建额外的闪光点
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const x = e.clientX + (Math.random() * 100 - 50);
+                        const y = e.clientY + (Math.random() * 100 - 50);
+                        createSparkle(x, y);
+                    }, i * 50);
+                }
+            });
+        }
+        
+        // 创建闪光点
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            document.body.appendChild(sparkle);
+            
+            // 移除闪光点
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+        
+        // 惊喜效果函数增强版
+        function createSurprise() {
+            // 倒计时效果
+            const container = document.querySelector('.yes-container');
+            
+            // 添加倒计时元素
+            const countdown = document.createElement('div');
+            countdown.className = 'countdown';
+            countdown.textContent = '3';
+            container.insertBefore(countdown, container.firstChild);
+            
+            // 倒计时动画
+            setTimeout(() => {
+                countdown.textContent = '2';
+                setTimeout(() => {
+                    countdown.textContent = '1';
+                    setTimeout(() => {
+                        countdown.textContent = '惊喜！';
+                        
+                        // 创建爱心爆炸效果
+                        createHeartExplosion();
+                        
+                        // 添加额外的庆祝元素
+                        addConfetti();
+                        addFireworks();
+                        
+                        // 3秒后移除倒计时
+                        setTimeout(() => {
+                            countdown.remove();
+                        }, 3000);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }
+        
+        // 创建爱心爆炸效果
+        function createHeartExplosion() {
+            const container = document.querySelector('.yes-container');
+            const explosion = document.createElement('div');
+            explosion.className = 'heart-explosion';
+            container.appendChild(explosion);
+            
+            // 创建更多爆炸的爱心
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.style.position = 'absolute';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.color = ['#ff69b4', '#ff85c0', '#ff99cc', '#ffb6d9'][Math.floor(Math.random() * 4)];
+                
+                // 随机角度和距离
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 200;
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+                
+                heart.style.left = '50%';
+                heart.style.top = '50%';
+                heart.style.transform = 'translate(-50%, -50%)';
+                
+                explosion.appendChild(heart);
+                
+                // 触发动画
+                setTimeout(() => {
+                    heart.style.transition = 'all 1s ease-out';
+                    heart.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random() * 360}deg)`;
+                    heart.style.opacity = '0';
+                }, 10);
+            }
+            
+            // 移除爆炸容器
+            setTimeout(() => {
+                explosion.remove();
+            }, 2000);
+        }
+        
+        // 添加庆祝彩屑
+        function addConfetti() {
+            const container = document.querySelector('.yes-container');
+            
+            for (let i = 0; i < 200; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'absolute';
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    confetti.style.backgroundColor = ['#ff69b4', '#ff85c0', '#ffccff', '#ffd9da', '#ffffff'][Math.floor(Math.random() * 5)];
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-20px';
+                    confetti.style.opacity = Math.random() * 0.5 + 0.5;
+                    confetti.style.borderRadius = '50%';
+                    confetti.style.pointerEvents = 'none';
+                    container.appendChild(confetti);
+                    
+                    // 下落动画
+                    const duration = Math.random() * 5 + 5;
+                    confetti.style.transition = `all ${duration}s linear`;
+                    
+                    setTimeout(() => {
+                        confetti.style.transform = `translateY(${window.innerHeight + 20}px) rotate(${Math.random() * 720}deg)`;
+                        
+                        // 移除彩屑
+                        setTimeout(() => {
+                            confetti.remove();
+                        }, duration * 1000);
+                    }, 10);
+                }, i * 20);
+            }
+        }
+        
+        // 添加烟花效果
+        function addFireworks() {
+            const container = document.querySelector('.yes-container');
+            
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.style.position = 'absolute';
+                    firework.style.left = Math.random() * 80 + 10 + '%';
+                    firework.style.bottom = '-50px';
+                    firework.style.width = '5px';
+                    firework.style.height = '5px';
+                    firework.style.backgroundColor = ['#ff69b4', '#ff85c0', '#ffccff'][Math.floor(Math.random() * 3)];
+                    firework.style.borderRadius = '50%';
+                    firework.style.pointerEvents = 'none';
+                    container.appendChild(firework);
+                    
+                    // 上升动画
+                    const height = Math.random() * 300 + 200;
+                    firework.style.transition = `all ${Math.random() * 2 + 1}s ease-out`;
+                    
+                    setTimeout(() => {
+                        firework.style.transform = `translateY(-${height}px)`;
+                        firework.style.opacity = '0';
+                        
+                        // 爆炸效果
+                        setTimeout(() => {
+                            createFireworkBurst(firework.offsetLeft + 2.5, firework.offsetTop);
+                            firework.remove();
+                        }, 1000);
+                    }, 10);
+                }, i * 1500);
+            }
+        }
+        
+        // 创建烟花爆炸效果
+        function createFireworkBurst(x, y) {
+            const container = document.querySelector('.yes-container');
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.width = Math.random() * 3 + 2 + 'px';
+                particle.style.height = Math.random() * 3 + 2 + 'px';
+                particle.style.backgroundColor = ['#ff69b4', '#ff85c0', '#ffccff', '#ffffff'][Math.floor(Math.random() * 4)];
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                container.appendChild(particle);
+                
+                // 随机角度和距离
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 100;
+                const vx = Math.cos(angle) * distance;
+                const vy = Math.sin(angle) * distance;
+                
+                // 动画
+                particle.style.transition = `all ${Math.random() * 2 + 1}s ease-out`;
+                
+                setTimeout(() => {
+                    particle.style.transform = `translate(${vx}px, ${vy}px)`;
+                    particle.style.opacity = '0';
+                    
+                    // 移除粒子
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 1000);
+                }, 10);
+            }
+        }
+    </script>
+</body>
+</html>
